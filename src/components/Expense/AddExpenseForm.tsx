@@ -1,17 +1,32 @@
-import React, { useState } from "react";
-const AddExpenseForm = () => {
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../context/AppContext"; // Import the AppContext
+import { Expense } from "../../types/types";
+
+const AddExpenseForm: React.FC = () => {
   // Exercise: Consume the AppContext here
+  const { expenses, setExpenses } = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables
+  const [name, setName] = useState<string>("");
+  const [cost, setCost] = useState<number | string>("");
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Exercise: Add add new expense to expenses context array
+    // Exercise: Add new expense to expenses context array
+    const newExpense: Expense = {
+      id: Date.now().toString(), name, 
+      cost: typeof cost === "string" ? parseFloat(cost) : cost,
+    }; 
+
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+
+    setName("");
+    setCost("");
   };
 
   return (
-    <form onSubmit={(event) => onSubmit(event)}>
+    <form onSubmit={onSubmit}>
       <div className="row">
         <div className="col-sm">
           <label htmlFor="name">Name</label>
@@ -20,9 +35,9 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
-            value={""}
-            // HINT: onChange={}
-          ></input>
+            value={name}
+            onChange={(event) => setName(event.target.value)} // Update the name state
+          />
         </div>
         <div className="col-sm">
           <label htmlFor="cost">Cost</label>
@@ -31,9 +46,9 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="cost"
-            value={0}
-            // HINT: onChange={}
-          ></input>
+            value={cost}
+            onChange={(event) => setCost(event.target.value)} // Update the cost state
+          />
         </div>
         <div className="col-sm">
           <button type="submit" className="btn btn-primary mt-3">
@@ -44,5 +59,6 @@ const AddExpenseForm = () => {
     </form>
   );
 };
+
 
 export default AddExpenseForm;
