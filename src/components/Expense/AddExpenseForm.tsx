@@ -36,7 +36,7 @@ const AddExpenseForm: React.FC = () => {
             className="form-control"
             id="name"
             value={name}
-            onChange={(event) => setName(event.target.value)} // Update the name state
+            onChange={(event) => setName(event.target.value)} 
           />
         </div>
         <div className="col-sm">
@@ -47,7 +47,7 @@ const AddExpenseForm: React.FC = () => {
             className="form-control"
             id="cost"
             value={cost}
-            onChange={(event) => setCost(event.target.value)} // Update the cost state
+            onChange={(event) => setCost(event.target.value)} 
           />
         </div>
         <div className="col-sm">
