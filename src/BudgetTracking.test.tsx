@@ -89,7 +89,7 @@ describe("Budget Tracking App", () => {
     fireEvent.click(saveButton);
 
     // Check if the remaining balance is updated correctly
-    const remainingText = screen.getByText(/Remaining: \$500/i); // Initial $1000 - $450
+    const remainingText = screen.getByText(/Remaining: \$550/i); // Initial $1000 - $450
     expect(remainingText).toBeInTheDocument();
   });
 
